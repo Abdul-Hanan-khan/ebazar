@@ -1,7 +1,5 @@
 import 'package:ebazar/view/app_colors/app_colors.dart';
-import 'package:ebazar/view/screens/forgot_password.dart';
-import 'package:ebazar/view/screens/home_page/home_page.dart';
-import 'package:ebazar/view/screens/sign_up.dart';
+import 'package:ebazar/view/screens/login.dart';
 import 'package:ebazar/view/widgets/appBar.dart';
 import 'package:ebazar/view/widgets/error_dialog.dart';
 import 'package:ebazar/view/widgets/my_button.dart';
@@ -10,8 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  SignUp({Key? key}) : super(key: key);
+  var usernameCtr = TextEditingController();
   var emailCtr = TextEditingController();
   var passwordCtr = TextEditingController();
 
@@ -35,7 +34,7 @@ class LoginPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        'Welcome Login',
+                        'Welcome Sign Up',
                         style: TextStyle(
                             color: AppColors.blueAccent, fontSize: 21.sp),
                       ),
@@ -86,12 +85,20 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 28.h,
+                // height: 28.h,
                 child: Column(
                   children: [
                     MyTextField(
-                      controller: emailCtr,
+                      controller: usernameCtr,
                       label: 'Username',
+                      disableborder: true,
+                    ),
+                    SizedBox(
+                      height: 3.h,
+                    ),
+                    MyTextField(
+                      controller: emailCtr,
+                      label: 'Email',
                       disableborder: true,
                     ),
                     SizedBox(
@@ -103,15 +110,13 @@ class LoginPage extends StatelessWidget {
                       disableborder: true,
                     ),
                     SizedBox(
-                      height: 0.9.h,
+                      height: 5.h,
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment.centerRight,
-                      child: FlatButton(
-                        onPressed: () {
-                          Get.to(ForgotPassword());
-                        },
-                        child: const Text(
+                      child: InkWell(
+                        hoverColor: AppColors.pink,
+                        child: Text(
                           'Forgot Password',
                           style: TextStyle(color: AppColors.pink),
                         ),
@@ -124,7 +129,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Container(
-
+                height: 30.h,
                 child: Column(
                   children: [
                     SizedBox(
@@ -134,28 +139,21 @@ class LoginPage extends StatelessWidget {
                       width: 50.w,
                       child: MyButton(
                         onPressed: () {
-                          Get.to(HomePage());
-                          // if (signInValidation(context)) {
-                          //   // go to home
-                          // }
+                          if (signUpValidation(context)) {
+                            // go to home
+                          }
                         },
-                        buttonText: "Login",
+                        buttonText: "Sign Up",
                       ),
                     ),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Don't have an account? "),
-                        FlatButton(
-                          onPressed: () {
-                            Get.off(SignUp());
-                          },
-                          child: const Text(
-                            'Create Now',
-                            style: TextStyle(color: AppColors.pink),
-                          ),
-                        )
+                        const Text("have an account? "),
+                        FlatButton(onPressed: (){
+                          Get.off(LoginPage());
+                        },child: const Text('Login Now',style: TextStyle(color: AppColors.pink),),)
                       ],
                     ),
                   ],
@@ -168,7 +166,7 @@ class LoginPage extends StatelessWidget {
     ));
   }
 
-  bool signInValidation(BuildContext context) {
+  bool signUpValidation(BuildContext context) {
     if (emailCtr.text.trim().length == 0) {
       showDialog(
           barrierDismissible: false,
@@ -199,7 +197,19 @@ class LoginPage extends StatelessWidget {
             );
           });
       return false;
-    } else
+    } else if (usernameCtr.text.trim().length == 0) {
+      showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext context) {
+            return ErrorDialoge(
+              message: "Please Enter Username.",
+            );
+          });
+      return false;
+    }
+
+    else
       return true;
   }
 }

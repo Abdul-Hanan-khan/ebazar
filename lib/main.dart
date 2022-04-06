@@ -1,3 +1,4 @@
+import 'package:ebazar/controller/bottom_bar_controller.dart';
 import 'package:ebazar/view/screens/getting_started.dart';
 import 'package:ebazar/view/screens/login.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    var bottomBarController=Get.put(BottomBarController());
     
         return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
             primarySwatch: Colors.pink,
@@ -31,17 +35,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-    );
-  }
-}
