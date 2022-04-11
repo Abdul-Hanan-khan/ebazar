@@ -1,4 +1,4 @@
-import 'package:ebazar/view/app_colors/app_colors.dart';
+import 'package:ebazar/view/app_config/app_colors.dart';
 import 'package:ebazar/view/screens/login.dart';
 import 'package:ebazar/view/widgets/appBar.dart';
 import 'package:ebazar/view/widgets/error_dialog.dart';

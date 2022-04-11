@@ -41,8 +41,10 @@ dev_dependencies:
 
   responsive_sizer: ^3.0.5+1
   get: ^4.6.1
-#  carousel_slider: ^4.0.0
-  carousel_pro: ^1.0.0
+  carousel_slider: ^4.0.0
+  flutter_rating_bar: ^4.0.0
+
+#  carousel_pro: ^1.0.0
   cached_map: ^2.0.5
 
 

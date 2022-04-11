@@ -1,4 +1,4 @@
-import 'package:ebazar/view/app_colors/app_colors.dart';
+import 'package:ebazar/view/app_config/app_colors.dart';
 import 'package:ebazar/view/screens/forgot_password.dart';
 import 'package:ebazar/view/screens/home_page/home_page.dart';
 import 'package:ebazar/view/screens/sign_up.dart';
@@ -6,6 +6,7 @@ import 'package:ebazar/view/widgets/appBar.dart';
 import 'package:ebazar/view/widgets/error_dialog.dart';
 import 'package:ebazar/view/widgets/my_button.dart';
 import 'package:ebazar/view/widgets/my_text_field.dart';
+import 'package:ebazar/view/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
@@ -135,6 +136,7 @@ class LoginPage extends StatelessWidget {
                       child: MyButton(
                         onPressed: () {
                           Get.to(HomePage());
+                          // Get.to( MyRatingBar(itemCount: 5,));
                           // if (signInValidation(context)) {
                           //   // go to home
                           // }

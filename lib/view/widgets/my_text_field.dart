@@ -1,6 +1,6 @@
 
-import 'package:ebazar/view/app_colors/app_colors.dart';
-import 'package:ebazar/view/app_colors/styles.dart';
+import 'package:ebazar/view/app_config/app_colors.dart';
+import 'package:ebazar/view/app_config/styles.dart';
 import 'package:flutter/material.dart';
 
 class MyTextField extends StatelessWidget {

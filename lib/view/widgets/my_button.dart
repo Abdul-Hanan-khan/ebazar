@@ -1,4 +1,4 @@
-import 'package:ebazar/view/app_colors/app_colors.dart';
+import 'package:ebazar/view/app_config/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
