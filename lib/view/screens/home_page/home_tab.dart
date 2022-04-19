@@ -1,4 +1,5 @@
 import 'package:ebazar/view/app_config/app_colors.dart';
+import 'package:ebazar/view/screens/see_all_categories.dart';
 import 'package:ebazar/view/widgets/image_slider.dart';
 import 'package:ebazar/view/widgets/rating_bar.dart';
 import 'package:ebazar/view/widgets/topbar_search.dart';
@@ -97,39 +98,46 @@ class HomeTab extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(right: 5, left: 5),
-                  height: 10.h,
-                  width: 10.h,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: AppColors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0.0, 1.0), //(x,y)
-                          blurRadius: 3.0,
-                        )
-                      ]),
-                  child: Center(
-                    child: IconButton(
-                      onPressed: () {},
-                      iconSize: 25.sp,
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        color: AppColors.pink,
+            GestureDetector(
+              onTap: (){
+                Get.to(SeeAllCategories());
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 5, left: 5),
+                    height: 10.h,
+                    width: 10.h,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: AppColors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0.0, 1.0), //(x,y)
+                            blurRadius: 3.0,
+                          )
+                        ]),
+                    child: Center(
+                      child: IconButton(
+                        onPressed: () {
+                          Get.to(SeeAllCategories());
+                        },
+                        iconSize: 25.sp,
+                        icon: Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppColors.pink,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 7.sp,
-                ),
-                Text('See All')
-              ],
+                  SizedBox(
+                    height: 7.sp,
+                  ),
+                  Text('See All')
+                ],
+              ),
             ),
           ],
         ),
