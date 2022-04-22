@@ -8,7 +8,7 @@ class TopBarSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
+
       height: 9.h,
       width: Get.width,
 
@@ -17,7 +17,7 @@ class TopBarSearch extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.symmetric(horizontal: 5),
-            width: 65.w,
+            width: 55.w,
             height: 5.h,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -27,10 +27,11 @@ class TopBarSearch extends StatelessWidget {
               children:  [
                 Icon(Icons.search,color: AppColors.pink,),
                 SizedBox(width: 7,),
-                Text('Search Something',style: TextStyle(color: AppColors.grey),)
+                Text('Search Something',style: TextStyle(color: AppColors.grey,fontSize: 15.sp),)
               ],
             ),
           ),
+
           Row(
             children: [
               Container(
@@ -48,7 +49,7 @@ class TopBarSearch extends StatelessWidget {
                             color: AppColors.pink,
                             borderRadius: BorderRadius.circular(30)
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text('1',style: TextStyle(
                               color: AppColors.white
                           ),),
@@ -75,7 +76,7 @@ class TopBarSearch extends StatelessWidget {
                             color: AppColors.pink,
                             borderRadius: BorderRadius.circular(30)
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text('1',style: TextStyle(
                               color: AppColors.white
                           ),),

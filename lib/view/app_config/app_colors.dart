@@ -6,6 +6,7 @@ class AppColors {
   static  const blueAccent = Color(0Xff042C5C);
   static  const appBackground = Color(0Xffe8f0ff);
   static  const grey = Colors.grey;
+  static  const black = Colors.black;
   static  const orange = Colors.orange;
   static  const white = Colors.white;
   static Color border = Color(0xFF4ba94e);

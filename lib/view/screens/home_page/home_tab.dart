@@ -22,12 +22,17 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.white,
+          automaticallyImplyLeading: false,
+          title: TopBarSearch(),
+        ),
         backgroundColor: AppColors.appBackground,
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const TopBarSearch(),
 
+              SizedBox(height: 10.sp,),
               /// categories
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10),
