@@ -1,5 +1,5 @@
 import 'package:ebazar/view/app_config/app_colors.dart';
-import 'package:ebazar/view/screens/sign_up.dart';
+import 'package:ebazar/view/screens/auth/sign_up.dart';
 import 'package:ebazar/view/widgets/appBar.dart';
 import 'package:ebazar/view/widgets/error_dialog.dart';
 import 'package:ebazar/view/widgets/my_button.dart';

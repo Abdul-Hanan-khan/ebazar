@@ -1,4 +1,4 @@
-import 'package:ebazar/view/screens/login.dart';
+import 'package:ebazar/view/screens/auth/login.dart';
 import 'package:ebazar/view/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,7 +1,8 @@
+import 'package:ebazar/controller/auth_controller.dart';
 import 'package:ebazar/view/app_config/app_colors.dart';
 import 'package:ebazar/view/screens/forgot_password.dart';
 import 'package:ebazar/view/screens/home_page/home_page.dart';
-import 'package:ebazar/view/screens/sign_up.dart';
+import 'package:ebazar/view/screens/auth/sign_up.dart';
 import 'package:ebazar/view/widgets/appBar.dart';
 import 'package:ebazar/view/widgets/error_dialog.dart';
 import 'package:ebazar/view/widgets/my_button.dart';
@@ -12,8 +13,9 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
+  AuthController authController=Get.find();
   LoginPage({Key? key}) : super(key: key);
-  var emailCtr = TextEditingController();
+  var usernameCtr = TextEditingController();
   var passwordCtr = TextEditingController();
 
   @override
@@ -91,7 +93,7 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   children: [
                     MyTextField(
-                      controller: emailCtr,
+                      controller: usernameCtr,
                       label: 'Username',
                       disableborder: true,
                     ),
@@ -131,18 +133,34 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       width: Get.width,
                     ),
-                    SizedBox(
-                      width: 50.w,
-                      child: MyButton(
-                        onPressed: () {
-                          Get.to(HomePage());
-                          // Get.to( MyRatingBar(itemCount: 5,));
-                          // if (signInValidation(context)) {
-                          //   // go to home
-                          // }
-                        },
-                        buttonText: "Login",
-                      ),
+                    Obx(
+                      ()=> !authController.loading.value? SizedBox(
+                        width: 50.w,
+                        child: MyButton(
+                          onPressed: ()async {
+                          await  authController.loginUser(userName: usernameCtr.text.trim(),password: passwordCtr.text.trim());
+                            if(authController.authInfo!.success == true){
+
+                              Get.snackbar('Login', authController.authInfo!.message.toString(),snackPosition: SnackPosition.BOTTOM,);
+                              Get.off(HomePage());
+                            }else{
+                              showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (BuildContext context)
+                                  {
+                                    return ErrorDialoge(message: authController.authInfo!.message.toString(),
+                                      onTapOk: (){
+
+                                      },
+                                    );
+                                  }
+                              );
+                            }
+                          },
+                          buttonText: "Login",
+                        ),
+                      ): Center(child: CircularProgressIndicator(color: AppColors.black,),),
                     ),
 
                     Row(
@@ -171,7 +189,7 @@ class LoginPage extends StatelessWidget {
   }
 
   bool signInValidation(BuildContext context) {
-    if (emailCtr.text.trim().length == 0) {
+    if (usernameCtr.text.trim().length == 0) {
       showDialog(
           barrierDismissible: false,
           context: context,
@@ -181,7 +199,7 @@ class LoginPage extends StatelessWidget {
             );
           });
       return false;
-    } else if (!GetUtils.isEmail(emailCtr.text)) {
+    } else if (!GetUtils.isEmail(usernameCtr.text)) {
       showDialog(
           barrierDismissible: false,
           context: context,

@@ -31,16 +31,15 @@ class CartTab extends StatelessWidget {
               Container(
                 child: ListView(
                   children: [
-                     Padding(
-                       padding:  EdgeInsets.only(bottom: 12.h),
-                       child: Column(
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 12.h),
+                      child: Column(
                         children: [
                           renderCartItem(),
                           renderCartItem(),
-
                         ],
+                      ),
                     ),
-                     ),
                   ],
                 ),
               ),
@@ -48,9 +47,9 @@ class CartTab extends StatelessWidget {
                 bottom: 0.sp,
                 child: Container(
                   width: 100.w,
-
                   color: AppColors.white,
-                  padding: EdgeInsets.only(left: 15.sp,right: 15.sp,top: 5.sp),
+                  padding:
+                      EdgeInsets.only(left: 15.sp, right: 15.sp, top: 5.sp),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,7 +153,7 @@ class CartTab extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -297,7 +296,8 @@ class CartTab extends StatelessWidget {
                                                     .withOpacity(0.5),
                                                 spreadRadius: 2,
                                                 blurRadius: 3,
-                                                offset: const Offset(0, 3) // changes position of shadow
+                                                offset: const Offset(0,
+                                                    3) // changes position of shadow
                                                 ),
                                           ],
                                           borderRadius:
@@ -333,7 +333,8 @@ class CartTab extends StatelessWidget {
                                                   Colors.grey.withOpacity(0.5),
                                               spreadRadius: 2,
                                               blurRadius: 3,
-                                              offset: Offset(0, 3), // changes position of shadow
+                                              offset: Offset(0,
+                                                  3), // changes position of shadow
                                             ),
                                           ],
                                           borderRadius:

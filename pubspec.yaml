@@ -43,7 +43,7 @@ dev_dependencies:
   get: ^4.6.1
   carousel_slider: ^4.0.0
   flutter_rating_bar: ^4.0.0
-
+  http: ^0.13.4
 #  carousel_pro: ^1.0.0
   cached_map: ^2.0.5
 

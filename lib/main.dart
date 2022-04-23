@@ -1,6 +1,6 @@
+import 'package:ebazar/controller/auth_controller.dart';
 import 'package:ebazar/controller/bottom_bar_controller.dart';
 import 'package:ebazar/view/screens/getting_started.dart';
-import 'package:ebazar/view/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var bottomBarController=Get.put(BottomBarController());
-    
+    var authController=Get.put(AuthController());
+
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
