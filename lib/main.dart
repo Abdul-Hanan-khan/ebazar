@@ -1,6 +1,7 @@
 import 'package:ebazar/controller/auth_controller.dart';
 import 'package:ebazar/controller/bottom_bar_controller.dart';
 import 'package:ebazar/view/screens/getting_started.dart';
+import 'package:ebazar/view/screens/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
           ),
           home:  ResponsiveSizer(
             builder: (context, orientation, screenType) {
-          return const GettingStarted();
+          return authController!.isLoggedIn.value?HomePage(): GettingStarted();
         },
     ),
         );

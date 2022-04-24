@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:ebazar/view/app_config/app_apis.dart';
 import 'package:http/http.dart' as http;
-import 'package:ebazar/model/login_model.dart';
+import 'package:ebazar/model/user_model.dart';
 import 'package:get/get.dart';
 
 class HttpServices{

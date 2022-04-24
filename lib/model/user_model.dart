@@ -1,3 +1,4 @@
+import 'package:cached_map/cached_map.dart';
 class AuthModel {
   bool? success;
   String? message;
@@ -134,4 +135,47 @@ class User {
     data['updated_at'] = updatedAt;
     return data;
   }
+
+
+
+
+
+  ///custom functions
+  static Future<User?> fromCache() async{
+    Mapped cacheJson = await Mapped.getInstance();
+    var cachedUser = cacheJson.loadFile(cachedFileName: "user");
+    print("user from cache: $cachedUser");
+    if(cachedUser==null)
+      return null;
+    else
+      return User.fromJson(cachedUser);
+  }
+
+  /// member functions
+
+  static Future<String> saveUserToCache(User user) async{
+    Mapped cacheJson = await Mapped.getInstance();
+    try{
+      cacheJson.saveFile(file: user.toJson(), cachedFileName: "user");
+    }
+    catch(e){
+      return "Failed to save user due to: $e";
+    }
+    return "Save user to cache successfully ";
+  }
+
+
+
+  static Future<String> deleteCachedUser()async{
+    Mapped cacheJson = await Mapped.getInstance();
+    try{
+      cacheJson.deleteFile(cachedFileName: "user");
+    }
+    catch(e){
+      return "Some Problem accoured while deleting user File:$e";
+    }
+    return "Deleted user to cache successfully";
+
+  }
+
 }

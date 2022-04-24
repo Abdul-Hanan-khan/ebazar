@@ -1,5 +1,7 @@
+import 'package:ebazar/controller/auth_controller.dart';
 import 'package:ebazar/view/app_config/app_colors.dart';
-import 'package:ebazar/view/screens/login.dart';
+import 'package:ebazar/view/screens/auth/login.dart';
+import 'package:ebazar/view/screens/home_page/home_page.dart';
 import 'package:ebazar/view/widgets/appBar.dart';
 import 'package:ebazar/view/widgets/error_dialog.dart';
 import 'package:ebazar/view/widgets/my_button.dart';
@@ -9,6 +11,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 
 class SignUp extends StatelessWidget {
+  AuthController authController= Get.find();
   SignUp({Key? key}) : super(key: key);
   var usernameCtr = TextEditingController();
   var emailCtr = TextEditingController();
@@ -135,16 +138,31 @@ class SignUp extends StatelessWidget {
                     SizedBox(
                       width: Get.width,
                     ),
-                    SizedBox(
-                      width: 50.w,
-                      child: MyButton(
-                        onPressed: () {
-                          if (signUpValidation(context)) {
-                            // go to home
-                          }
-                        },
-                        buttonText: "Sign Up",
-                      ),
+                    Obx(
+                      ()=> !authController.loading.value? SizedBox(
+                        width: 50.w,
+                        child: MyButton(
+                          onPressed: ()async {
+                            await  authController.userSignUp(email: emailCtr.text.trim(),userName: usernameCtr.text.trim(),password: passwordCtr.text.trim());
+                            if(authController.authInfo!.success == true){
+
+                              Get.snackbar('SignUp', authController.authInfo!.message.toString(),snackPosition: SnackPosition.BOTTOM,);
+                              Get.off(HomePage());
+                            }else{
+                              showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (BuildContext context)
+                                  {
+                                    return ErrorDialoge(message: authController.authInfo!.message.toString(),
+                                    );
+                                  }
+                              );
+                            }
+                          },
+                          buttonText: "Sign Up",
+                        ),
+                      ):Center(child: CircularProgressIndicator(color: AppColors.pink,),),
                     ),
 
                     Row(
