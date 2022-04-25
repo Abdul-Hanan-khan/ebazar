@@ -8,7 +8,7 @@ import 'package:cached_map/cached_map.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class AuthController extends GetxController {
-  RxBool isLoggedIn = false.obs;
+  RxBool? isLoggedIn = false.obs;
   RxBool loading = false.obs;
   AuthModel? authInfo = AuthModel();
   Rx<User>? user = User().obs;
@@ -16,10 +16,10 @@ class AuthController extends GetxController {
 
   Future<void> onInit() async {
     pref = await SharedPreferences.getInstance();
-    isLoggedIn.value = pref!.getBool('loggedIn')?? false;
+    isLoggedIn!.value = pref!.getBool('loggedIn')?? false;
     user!.value = (await User.fromCache())!;
     // isLoggedIn.value = user!.value == null ? false : true;
-    print(isLoggedIn.value);
+    print(isLoggedIn!.value);
     // TODO: implement onInit
     super.onInit();
   }
@@ -59,7 +59,7 @@ class AuthController extends GetxController {
       user!.value = authInfo!.data!.user!;
       pref!.setBool('loggedIn', true);
       pref!.setString('userId', user!.value.id.toString());
-      isLoggedIn.value = true;
+      isLoggedIn!.value = true;
       // sendToken(user.value.id);
       // backtoCartScreen ? Get.off(CartScreen(), transition: Transition.leftToRight) : Get.off(HomePage(), transition: Transition.fadeIn);
     }
@@ -68,7 +68,7 @@ class AuthController extends GetxController {
   logOut() {
     user!.value = User();
     User.deleteCachedUser();
-    isLoggedIn.value = false;
+    isLoggedIn!.value = false;
     Get.off(LoginPage());
     pref!.setBool('loggedIn', false);
   }

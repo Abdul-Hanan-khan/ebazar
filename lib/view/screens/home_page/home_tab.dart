@@ -1,6 +1,9 @@
+import 'package:ebazar/controller/home_controller.dart';
+import 'package:ebazar/model/home_model.dart';
 import 'package:ebazar/view/app_config/app_colors.dart';
 import 'package:ebazar/view/screens/see_all_categories.dart';
 import 'package:ebazar/view/widgets/image_slider.dart';
+import 'package:ebazar/view/widgets/my_button.dart';
 import 'package:ebazar/view/widgets/rating_bar.dart';
 import 'package:ebazar/view/widgets/topbar_search.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +14,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 class HomeTab extends StatelessWidget {
+  HomeController homeInfo = Get.find();
+
   HomeTab({Key? key}) : super(key: key);
   List<String> sliderImages = [
     'assets/banners/Banner2.png',
@@ -31,19 +36,29 @@ class HomeTab extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(
+                height: 10.sp,
+              ),
 
-              SizedBox(height: 10.sp,),
               /// categories
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    allCategories(),
-                    latestBanner(),
-                    itemsGrid(),
-                  ],
-                ),
+              Obx(
+                () => !homeInfo.isLoading.value
+                    ? Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            allCategories(
+                                category: homeInfo.homeModel!.data!.category),
+                            latestBanner(),
+                            itemsGrid(homeInfo.homeModel!.data!.product),
+                          ],
+                        ),
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(
+                        color: AppColors.pink,
+                      )),
               )
             ],
           ),
@@ -52,7 +67,7 @@ class HomeTab extends StatelessWidget {
     );
   }
 
-  Widget allCategories() {
+  Widget allCategories({List<Category>? category}) {
     return Column(
       children: [
         Align(
@@ -68,82 +83,82 @@ class HomeTab extends StatelessWidget {
         Row(
           children: [
             Container(
-              height: 15.h,
-              width: 69.w,
+              height: 10.h,
+              width: 90.w,
               // color: Colors.orangeAccent[200],
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: 15,
-                itemBuilder: (BuildContext context, int index) => Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 5, left: 5),
-                      height: 10.h,
-                      width: 10.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: AppColors.orange,
-                          boxShadow: [
-                            BoxShadow(
-                                color: AppColors.grey,
-                                blurRadius: 1,
-                                spreadRadius: 1)
-                          ]),
-                      child: Center(
-                        child: Image.asset('assets/images/clothes.png'),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 7.sp,
-                    ),
-                    Text('C Name')
-                  ],
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: (){
-                Get.to(SeeAllCategories());
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 5, left: 5),
-                    height: 10.h,
-                    width: 10.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: AppColors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(0.0, 1.0), //(x,y)
-                            blurRadius: 3.0,
-                          )
-                        ]),
+                itemCount: category!.length,
+                itemBuilder: (BuildContext context, int index) => Container(
+                  // SizedBox(
+                  //   height: 5.h,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 5),
                     child: Center(
-                      child: IconButton(
+                      child: RaisedButton(
                         onPressed: () {
+                          homeInfo.getSubCategory(category[index].id);
+                          homeInfo.selectedCatId!.value=category[index].id!;
                           Get.to(SeeAllCategories());
                         },
-                        iconSize: 25.sp,
-                        icon: Icon(
-                          Icons.arrow_forward_ios,
-                          color: AppColors.pink,
+                        color: AppColors.pink,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            category[index].title.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 7.sp,
-                  ),
-                  Text('See All')
-                ],
+                ),
               ),
             ),
+            // GestureDetector(
+            //   onTap: (){
+            //     Get.to(SeeAllCategories());
+            //   },
+            //   child: Column(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Container(
+            //         margin: EdgeInsets.only(right: 5, left: 5),
+            //         height: 10.h,
+            //         width: 10.h,
+            //         decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(50),
+            //             color: AppColors.white,
+            //             boxShadow: [
+            //               BoxShadow(
+            //                 color: Colors.grey,
+            //                 offset: Offset(0.0, 1.0), //(x,y)
+            //                 blurRadius: 3.0,
+            //               )
+            //             ]),
+            //         child: Center(
+            //           child: IconButton(
+            //             onPressed: () {
+            //               Get.to(SeeAllCategories());
+            //             },
+            //             iconSize: 25.sp,
+            //             icon: Icon(
+            //               Icons.arrow_forward_ios,
+            //               color: AppColors.pink,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //       SizedBox(
+            //         height: 7.sp,
+            //       ),
+            //       Text('See All')
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ],
@@ -168,12 +183,12 @@ class HomeTab extends StatelessWidget {
     );
   }
 
-  Widget itemsGrid() {
+  Widget itemsGrid(List<Product>? product) {
     return Container(
       height: 35.h,
       width: double.infinity,
       child: GridView.builder(
-        itemCount: 10,
+        itemCount: product!.length,
         scrollDirection: Axis.horizontal,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, childAspectRatio: 4 / 3.5),
@@ -202,16 +217,22 @@ class HomeTab extends StatelessWidget {
                 Positioned(
                   bottom: 18.sp,
                   left: 10.sp,
-                  child: Text(
-                    'Backpack',
-                    style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold),
+                  child: Container(
+                    width: 18.w,
+                    child: Text(
+                      '${product[index].title}',
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          TextStyle(fontSize: 9, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 Positioned(
                   bottom: 18.sp,
                   right: 10.sp,
                   child: Text(
-                    'Rs: 100',
+                    '${product[index].price}',
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         fontSize: 9,
                         fontWeight: FontWeight.bold,
@@ -221,7 +242,9 @@ class HomeTab extends StatelessWidget {
                 Positioned(
                   bottom: 10.sp,
                   right: 10.sp,
-                  child: MyRatingBar(itemSize: 10,),
+                  child: MyRatingBar(
+                    itemSize: 10,
+                  ),
                 ),
               ],
             ),
