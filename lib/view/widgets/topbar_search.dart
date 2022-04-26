@@ -1,4 +1,5 @@
 import 'package:ebazar/view/app_config/app_colors.dart';
+import 'package:ebazar/view/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
@@ -23,12 +24,17 @@ class TopBarSearch extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: AppColors.grey)
             ),
-            child: Row(
-              children:  [
-                Icon(Icons.search,color: AppColors.pink,),
-                SizedBox(width: 7,),
-                Text('Search Something',style: TextStyle(color: AppColors.grey,fontSize: 15.sp),)
-              ],
+            child: InkWell(
+              onTap: (){
+                Get.to(SearchScreen());
+              },
+              child: Row(
+                children:  [
+                  Icon(Icons.search,color: AppColors.pink,),
+                  SizedBox(width: 7,),
+                  Text('Search Something',style: TextStyle(color: AppColors.grey,fontSize: 15.sp),)
+                ],
+              ),
             ),
           ),
 
