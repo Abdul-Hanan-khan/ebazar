@@ -158,7 +158,7 @@ class HomeTab extends StatelessWidget {
           return InkWell(
             hoverColor: AppColors.pink,
             onTap: (){
-              Get.to(ProductDetailsPage());
+              Get.to(ProductDetailsPage(product[index].id.toString()));
             },
             child: Container(
               margin: const EdgeInsets.all(6),

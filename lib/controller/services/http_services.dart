@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'package:ebazar/model/home_model.dart';
+import 'package:ebazar/model/product_details_model.dart';
 import 'package:ebazar/model/search_model.dart';
 import 'package:ebazar/view/app_config/app_apis.dart';
+import 'package:ebazar/view/screens/product/product_details.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:ebazar/model/user_model.dart';
 import 'package:get/get.dart';
@@ -77,6 +80,23 @@ class HttpServices {
         return SearchModel.fromJson(jsonDecode(response.body));
       } else
         return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static Future<ProductDetailModel?> getProductDetails(@required String productId) async {
+    try {
+      String url=AppApis.BASE_URL+"home/detail?product_id=${productId}";
+      print(url);
+      var response = await http.get(
+        Uri.parse(url),
+      );
+      if (response.statusCode == 200) {
+        return ProductDetailModel.fromJson(jsonDecode(response.body));
+      } else {
+        return null;
+      }
     } catch (e) {
       return null;
     }

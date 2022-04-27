@@ -5,8 +5,9 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 class MyButton extends StatelessWidget {
   String buttonText;
   Function onPressed;
+  double ?fontSize;
 
-  MyButton({Key? key, required this.buttonText, required this.onPressed})
+  MyButton({Key? key,this.fontSize, required this.buttonText, required this.onPressed})
       : super(key: key);
 
   @override
@@ -26,7 +27,7 @@ class MyButton extends StatelessWidget {
 
           Text(
             buttonText,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white,fontSize: fontSize??17),
           ),
 
 
